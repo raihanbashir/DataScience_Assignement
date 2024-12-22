@@ -33,7 +33,8 @@ if uploaded_file:
 
     # Correlation heatmap
     st.header("Correlation Heatmap")
-    correlation_matrix = df.corr()
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    correlation_matrix = df[numeric_cols].corr()
     fig_corr = px.imshow(correlation_matrix, text_auto=True, title="Feature Correlation Heatmap")
     st.plotly_chart(fig_corr)
 
